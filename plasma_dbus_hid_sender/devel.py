@@ -1,5 +1,5 @@
-import jeepney
 import usb
+import struct
 
 def hid_set_report(dev, report):
     """ Implements HID SetReport via USB control transfer """
@@ -23,6 +23,9 @@ def hid_get_report(dev):
 
 dev = usb.core.find(idVendor=0x3434, idProduct=0x0800)
 
-
+value = 1
+report = struct.pack('I', value)
+# Send the feature report
+hid_set_report(dev, report)
 
 # qdbus org.kde.KWin /KWin currentDesktop
